@@ -21,9 +21,11 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
+          TIMESTAMP=$(date +%Y%m%d%H%M%S)
+          IMAGE_TAG=maeriley/nginx_testapp:${TIMESTAMP}
           docker pull nginx:latest
-          docker build -t maeriley/nginx_testapp --build-arg CACHEBUST=$(date +%s) .
-          docker push maeriley/nginx_testapp 
+          docker build -t ${IMAGE_TAG} --build-arg CACHEBUST=$(date +%s) .
+          docker push ${IMAGE_TAG}
         env:
           DOCKER_BUILDKIT: 1
           DOCKER_CLI_ACI: 1
