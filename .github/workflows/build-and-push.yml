@@ -2,28 +2,41 @@ name: Build and Push Docker Image
 
 on:
   push:
-    branches:
-      - main
+    branches: ['main']
+
+env:
+  REGISTRY: docker.io  # Change this to your desired container registry
+  IMAGE_NAME: nginx_testapp  # Change this to your desired image name
 
 jobs:
-  build:
+  build-and-push-image:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      packages: write
+
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
+      - name: Log in to the Container registry
+        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and Push Docker Image
-        run: |
-          docker pull nginx:latest
-          docker build -t maeriley/nginx_testapp:0.1.1 --build-arg CACHEBUST=$(date +%s) .
-          docker push maeriley/nginx_testapp:0.1.1
-        env:
-          DOCKER_BUILDKIT: 1
-          DOCKER_CLI_ACI: 1
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
