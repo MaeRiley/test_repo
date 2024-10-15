@@ -1,23 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Actions in K8s</title>
+    <title>Riley B. - Resume</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="title">
+    <div class="container">
+        <header>
+            <h1>Riley B.</h1>
+            <p>Systems Administrator | IT Specialist</p>
+        </header>
+
+        <section class="profile">
+            <h2>Profile</h2>
+            <p>With over ten years of IT experience, I specialize in Windows Server and Linux Server administration, IT Support, Cloud Deployments, Networking, and more.</p>
+        </section>
+
+        <section class="experience">
+            <h2>Experience</h2>
         
-        <p>
-            <h1>Github Actions Build and Push Demo v0.1.4</h1>
-        </p>
+            <div class="job">
+                <h3>Systems Administrator - Regional ISP</h3>
+                <p>2006 - 2024</p>
+                <ul>
+                    <li>Led triaging of customer outages during natural disasters.</li>
+                    <li>Supported and managed DaaS environments.</li>
+                    <li>Worked with Network Engineers to resolve customer's issues.</li>
+                    <li>Managed and tested server backups and disaster recovery precedures.</li>
+                    <li>Parsed router logs to track down issues in customer's on-prem router's.</li>
+                    <li>Resolved customer concerns with DNS related issues.</li>
+                    <li>Wrote automation scripts in Bash Shell for Linux servers</li>
+                    <li>Used SSH to shell into an manage network equipment and set top equipment.</li>
+                    
+                </ul>
+            </div>
+        </section>
+
+        <section class="education">
+            <h2>Education</h2>
+            <p>Western Kentucky University: Majored in Information Technology</p>
+            <p>Certifications: CompTIA A+, CompTIA Linux+, Azure AZ-900, Kubernetes CKA</p>
+            
+        </section>
+
+        <footer>
+            
+            <h6>This resume is self-hosted and deployed in a K8s cluster.</h6>
+            <button id="themeToggle">Toggle Dark Mode</button>
+            
+        </footer>
     </div>
     
-    <div class="title">
-        
-        <p>Running in a self-hosted k8s</p>
-    
-    </div>
+    <script>
+        const toggleButton = document.getElementById('themeToggle');
+        const body = document.body;
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+        });
+    </script>
 </body>
 </html>
