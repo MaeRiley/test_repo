@@ -23,7 +23,7 @@ jobs:
         run: |
           docker pull nginx:latest
           docker build -t maeriley/nginx_testapp:0.1.8 --build-arg CACHEBUST=$(date +%s) .
-          docker push maeriley/nginx_testapp:latest
+          docker push maeriley/nginx_testapp:0.1.8
         env:
           DOCKER_BUILDKIT: 1
           DOCKER_CLI_ACI: 1
