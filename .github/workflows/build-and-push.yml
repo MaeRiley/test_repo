@@ -22,8 +22,8 @@ jobs:
       - name: Build and Push Docker Image
         run: |
           docker pull nginx:latest
-          docker build -t maeriley/nginx_testapp:0.1.7 --build-arg CACHEBUST=$(date +%s) .
-          docker push maeriley/nginx_testapp:0.1.7
+          docker build -t maeriley/nginx_testapp:0.1.8 --build-arg CACHEBUST=$(date +%s) .
+          docker push maeriley/nginx_testapp:latest
         env:
           DOCKER_BUILDKIT: 1
           DOCKER_CLI_ACI: 1
