@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: alpine-latest
 
     steps:
       - name: Checkout Repository
@@ -22,8 +22,8 @@ jobs:
       - name: Build and Push Docker Image
         run: |
           docker pull nginx:latest
-          docker build -t maeriley/nginx_testapp:0.1.8 --build-arg CACHEBUST=$(date +%s) .
-          docker push maeriley/nginx_testapp:0.1.8
+          docker build -t maeriley/nginx_testapp:0.1.9 --build-arg CACHEBUST=$(date +%s) .
+          docker push maeriley/nginx_testapp:0.1.9
         env:
           DOCKER_BUILDKIT: 1
           DOCKER_CLI_ACI: 1
