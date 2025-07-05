@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: alpine-latest
+    runs-on: alpine3.90
 
     steps:
       - name: Checkout Repository
